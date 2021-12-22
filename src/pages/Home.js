@@ -1,9 +1,10 @@
+import { useState } from 'react';
 import {AiOutlineLoading3Quarters} from 'react-icons/ai'
 import { useGlobalContext } from "../context.js";
 import TaskList from "../TaskList.js";
 
 const Home = () => {
-    const {loading, tasks, text, setText, addTask} = useGlobalContext()
+    const {loading, tasks, text, setText, addTask, alert} = useGlobalContext()
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -20,6 +21,7 @@ const Home = () => {
 
     return <>
     <div className="main">
+        {alert.visible && <div className='alert'>{alert.message}</div>}
         <form className='login-form' onSubmit={handleSubmit}>
             <label for='input'>
                 <h1>Add a task</h1>

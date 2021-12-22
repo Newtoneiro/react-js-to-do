@@ -306,3 +306,23 @@ body {
 .update-button-unsaved {
   border: solid 3px rgb(196, 72, 67);
 }
+
+.find-task {
+  margin-top: 1rem;
+  border-radius: 10px;
+  border: solid 2px rgb(37, 97, 138);
+  text-align: center;
+  letter-spacing: 2px;
+}
+
+.alert {
+  position: absolute;
+  margin-top: 17.5rem;
+  border-radius: 10px;
+  border: solid 2px rgb(37, 97, 138);
+  text-align: center;
+  letter-spacing: 2px;
+  font-weight: 800;
+  color: rgb(119, 197, 119);
+  border: solid 3px rgb(14, 70, 14);
+}

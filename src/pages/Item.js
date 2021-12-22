@@ -7,7 +7,7 @@ import {AiOutlineLoading3Quarters} from 'react-icons/ai'
 
 const Item = () => {
     const {id} = useParams()
-    const {getTask, changeTask} = useGlobalContext()
+    const {getTask, changeTask, setAlert} = useGlobalContext()
     const task = getTask(id)
 
     const [imgLoading, setImgLoading] = useState(false)
@@ -15,6 +15,7 @@ const Item = () => {
     const [deadline, setDeadline] = useState(task.deadline)
     const [img, setImg] = useState(task.img)
     const [updated, setUpdated] = useState(false)
+    const [changed, setChanged] = useState(false)
 
     const handleUpdate = async () => {
         setImgLoading(true)
@@ -22,6 +23,7 @@ const Item = () => {
         setImg(new_img)
         setImgLoading(false)
         setUpdated(false)
+        setChanged(true);
     }
 
     const updateTitle = (txt) => {
@@ -53,7 +55,7 @@ const Item = () => {
                 </div>
             </div>
             <div className="button-holder-item">
-            <Link to='/' className="back-home">
+            <Link to='/' className="back-home" onClick={() => {if (changed) {setAlert({visible: true, message:'Changed item'})}}}>
                 <h2>Back home</h2>
             </Link>
             <button type='button' className={`update-button ${updated && 'update-button-unsaved'}`} onClick={() => handleUpdate()}>Update!</button>

@@ -7,11 +7,19 @@ const AppProvider = ({children})=>{
     const [tasks, setTasks] = useState(JSON.parse(localStorage['data']))
     const [loading, setLoading] = useState(false)
     const [text, setText] = useState('')
+    const [alert, setAlert] = useState({visible: false, message: ''})
     
     useEffect(() => {
-        console.log('stored in cash')
+        console.log('stored in cashe')
         localStorage['data'] = JSON.stringify(tasks)
     }, [tasks])
+
+    useEffect(() => {
+        const timeout = setTimeout(()=>{
+        setAlert({show: false, mgs: '', type: ''})
+        }, 2000)
+        return () => clearTimeout(timeout)
+    }, [alert])
 
     function getTask(id){
         var task = tasks.find(item => item.id === parseInt(id))
@@ -32,6 +40,7 @@ const AppProvider = ({children})=>{
     const removeTask = (id) => {
         const newTasks = tasks.filter((task) => task.id !== id)
         setTasks(newTasks)
+        setAlert({visible: true, message:'Removed item'})
     }
 
     const addTask = async () => {
@@ -41,6 +50,7 @@ const AppProvider = ({children})=>{
         setTasks([...tasks, newTask])
         setText('')
         setLoading(false)
+        setAlert({visible: true, message:'Added item'})
     }
 
     const changeTask = async (id, title, deadline) => {
@@ -62,6 +72,8 @@ const AppProvider = ({children})=>{
         addTask,
         getTask,
         changeTask,
+        setAlert,
+        alert,
     }}>
         {children}
     </AppContext.Provider>
